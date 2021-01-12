@@ -3,7 +3,7 @@ This project contains the code used for the experimental results of the paper
 Authors: Federico Toffano, Paolo Viappiani, and Nic Wilson.
 
 The file TestRandom.py runs experiments with the settings used for of Table 1, Table 2, Table 3, Table 4 and Figure 3.
-The datasets are randomly generated at each execution
+The datasets are randomly generated at each execution.
 
 The file TestRandom.txt runs experiments with the settings used for of Table 5. The datasets used are stored in the
 folder "dataset" and briefly described in the paper.
