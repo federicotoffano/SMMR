@@ -7,7 +7,7 @@ import statistics
 repetitions = 2
 
 dateTimeObj = datetime.datetime.now()
-#filename to store summury of the experiments
+#filename to store summary of the experiments
 filename = 'experiments/random_' + str(dateTimeObj.strftime("%d_%b_%Y_%H_%M_%S"))
 #filename to store details of the experiments
 filename_data = 'experiments/random_' + str(dateTimeObj.strftime("%d_%b_%Y_%H_%M_%S")) + "_data"
