@@ -45,7 +45,7 @@ def sat_solver(x, A, k, sat_instances, sat_clauses, sat_solutions):
         for c in sat_clauses:
             g.add_clause(c)
 
-        # The cardinality constraint that |By| = K (i.e., that y is a complete string) isexpressed as sum_αi∈A Xi = K.
+        # The cardinality constraint |By| = K (i.e., y must be a complete string) is expressed as sum_αi∈A Xi = K.
         v = []
         for i in range(len(A)):
             v.append(i + 1)
@@ -53,7 +53,7 @@ def sat_solver(x, A, k, sat_instances, sat_clauses, sat_solutions):
         g.add_atmost(v, k)
         time_to_add_constraints += time.time() - ad
 
-        # The constraint that y extends x is expressed as: For all i ∈ {1, Len(x)},
+        # Constraint y extends x
         for i in range(len(x)):
             # if x(i) = 1 then Xi = 1 (where x(i) is the ith position of Boolean string x);
             if x[i] == 1:
@@ -121,8 +121,7 @@ def  nextBT(x, k, n):
 
 
 
-    #If Ifxcontains no zero (i.e., it only contains ones) orxstarts with K ones (i.e.x=1[k]0[N−K]) then we finish:
-    #  since we have then completely covered the space
+    # If x contains no zero (i.e., it only contains ones) or x starts with K ones (i.e. x=1[k]0[N−K]) then we finish
     if x.count(0) == 0 or x[:k].count(1) == k:
         return [-1]
 
@@ -144,7 +143,7 @@ def  nextBT(x, k, n):
         last_zero_index = len(x1) - 1 - x1[::-1].index(0)
         y = x1[:last_zero_index]
 
-    # If Ones(y) = K − 1 we define NextBT(x) to be the complete string y10 · · · 0. (The
+    # If Ones(y) = K − 1, we define NextBT(x) to be the complete string y10 · · · 0. (The
     # reason for filling with zeros is that we already have the maximum number of ones.)
     if y.count(1) == k - 1:
         return y + [1] + [0] * (n - len(y) - 1)
@@ -168,10 +167,10 @@ def next(x, k, n):
         return [-1]
 
     zeros_x = x.count(0)
-    # If Zeros(x)< N−K−1 and Ones(x)= K then we set Next(x) to be the string x0...0
+    # If Zeros(x)< N−K−1 and Ones(x)= K, we set Next(x) to be the string x0...0
     if zeros_x < n - k - 1 and x.count(1) == k:
         return x + [0] * (n - len(x))
-    #If Zeros(x)< N−K−1 and Ones(x)< K then we set Next(x) to be the string x0...0
+    #If Zeros(x)< N−K−1 and Ones(x)< K, we set Next(x) to be the string x0...0
     elif zeros_x < n - k - 1:
         return x + [0]
     #Otherwise, we haveZeros(x) =N−K−1 and we set Next(x)to be the complete string of the form x01···1
@@ -198,7 +197,7 @@ def getBFromString(x, A):
 
 def SMMR_BF_LP(k, A, polytope):
     """
-    Computation of SMMR of A with cardinality k and polytope W. Brute force algorithm using linear programming.
+    Computation of SMMR of A with cardinality k and polytope W. Brute force algorithm using the linear programming solver.
 
     :param A: list of vectors of floats:  set of alternatives.
     :param k: integer: cardinality of SMMR.
@@ -220,7 +219,7 @@ def SMMR_BF_LP(k, A, polytope):
 
 def SMMR_BF_EPI(k, A, polytope):
     """
-    Computation of SMMR of A with cardinality k and polytope W. Brute force algorithm using epigraph of the value function.
+    Computation of SMMR of A with cardinality k and polytope W. Brute force algorithm using the epigraph of the value function.
 
     :param A: list of vectors:  set of alternatives.
     :param k: integer: cardinality of SMMR.
@@ -243,7 +242,7 @@ def SMMR_BF_EPI(k, A, polytope):
 
 def SMMR_SAT_LP(k, A, polytope, up_Wp = float('inf'), upper_bound=float('inf')):
     """
-    Computation of SMMR of A with cardinality k and polytope W. SAT based algorithm using linear programming.
+    Computation of SMMR of A with cardinality k and polytope W. SAT based algorithm using the linear programming solver.
 
     :param A: list of vectors:  set of alternatives.
     :param k: integer: cardinality of SMMR.
@@ -366,13 +365,13 @@ def SMMR_SAT_LP(k, A, polytope, up_Wp = float('inf'), upper_bound=float('inf')):
 
 def SMMR_SAT_EPI(k, A, polytope, up_Wp = float('inf'), upper_bound=float('inf')):
     """
-    Computation of SMMR of A with cardinality k and polytope W. SAT based algorithm using epigraph of the value function.
+    Computation of SMMR of A with cardinality k and polytope W. SAT based algorithm using the epigraph of the value function.
 
     :param A: list of vectors:  set of alternatives.
     :param k: integer: cardinality of SMMR.
-    :param polytope: Instance of class Polytope: user preference state space
+    :param polytope: Instance of class Polytope: user preference state space.
     :param up_Wp: integer: upper bound on the cardinality of W'.
-    :param upper_bound: float: initial upper bpund of SMMR
+    :param upper_bound: float: initial upper bound of SMMR.
     :return:
     """
 
