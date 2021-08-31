@@ -1,6 +1,6 @@
 """
 Interface for the library pycddlib to
-define human friendly constraints.
+define user-friendly constraints.
 This class is used to represent the user preferences :math:`w`.
 """
 
@@ -20,14 +20,14 @@ class Polytope:
     :math:`w_i \geq 0, w_i \leq 1` and :math:`w_1 + ... + w_n = 1`.
 
     This class is an interface to interact with the library pycddlib defining constraints
-    with a human friendly syntax.
+    with a user-friendly syntax.
     
     
     :ivar vars: List of strings: id used to represent the dimensions of the polytope.
     :ivar n_vars: Integer: number of dimension of the polytope.
-    :ivar formatted_constraints: List of string: formatted constraints added so far.
+    :ivar formatted_constraints: List of string: formatted constraints defining the polytope.
     :ivar extreme_points: List of p-dimensional float: extreme points of the polytope considering the
-        formatted constraints added so far.
+        formatted constraints.
 
     """
 
@@ -37,9 +37,9 @@ class Polytope:
         :math:`w_i \geq 0, w_i \leq 1` and :math:`w_1 + ... + w_n = 1`.
 
         :param vars: list of string: List of id used to represent the dimensions of the polytope.
-        :param frac: boolean: If True the coefficients of the constraints will have to be
-            objects Fraction instead of float. This increase the precision of the polytope representation.
-        :param epi_var: string: Name of variable x used to define epigraph
+        :param frac: boolean: If True, the coefficients of the formatted constraints must be
+            fractions. This increase the precision of the polytope representation and avoid numerical errors.
+        :param epi_var: string: Name of variable used to represent the epigraph value
 
         """
 
@@ -245,7 +245,7 @@ class Polytope:
             matrix_row_l = [0] * (1 + n_vars)
             matrix_row_u = [0] * (1 + n_vars)
 
-            #setting b; note that lower bound >= so we need to change sign
+            # setting b value; note that we need to change the sign of the lower bound coefficent
             if frac:
                 matrix_row_l[0] = -Fraction(l_constraints[i])
                 matrix_row_u[0] = Fraction(u_constraints[i])
@@ -253,8 +253,8 @@ class Polytope:
                 matrix_row_l[0] = -l_constraints[i]
                 matrix_row_u[0] = u_constraints[i]
 
-            #setting scalar coefficient -a_i of current var i to 1;
-            # note that the coefficient is negative and lower bound >= so we need to change sign two times
+            # setting scalar coefficient -a_i of current var i to 1;
+            # note that we need to change the sign of the lower bound coefficent
             matrix_row_l[i + 1] = -(-1)
             matrix_row_u[i + 1] = -1
 
@@ -271,12 +271,12 @@ class Polytope:
 
         #sum constraints
 
-        #setting scalar coefficient to 1 for all variables; note -A and with >= we need to change sign
+        #setting scalar coefficient to 1 for all variables; note -A and we need to change the sign of the lower bound coefficent
         sum_constraint_l = [-(-1)] * (1 + n_vars)
         sum_constraint_u = [-1] * (1 + n_vars)
 
 
-        #setting constant term b; note that with >= we need to change sign
+        #setting constant term b; note that we need to change the sign of the lower bound coefficent
         sum_constraint_l[0] = -1
         sum_constraint_u[0] = 1
 
