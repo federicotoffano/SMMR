@@ -9,7 +9,7 @@ Set of methods to be used for:\n
 Notation of comments: \n
 \t1 - Objects alternative are indicated with s and t. \n
 \t2 - Sets of objects alternative are indicated with A and B. \n
-\t3 - Objects polytope (i.e. set of user preferences) is indicated with W. \n
+\t3 - Objects polytope (i.e. set of user preferences) are indicated with W. \n
 \t4 - Points of polytopes are indicated with w. \n
 """
 
@@ -353,7 +353,7 @@ def NO_test(s, A, W):
 
 def SMR_LP(B, A, W):
     """ Computation of worst case loss of B with respect to A and W
-    using linear programming
+    using the linear programming solver
 
     :param B: list of alternatives
     :param A: list of alternatives.
@@ -619,7 +619,7 @@ def PMR_LP(s, t, W):
     return alpha, solution_point
 
 def MR_LP(s, A, W):
-    """ Computing max regret of s in A (w.r.t. W) using linear programming.
+    """ Computing max regret of s in A (w.r.t. W) using the linear programming solver.
     (based only on the utility vector of objects alternative, i.e. weights
     vectors of objects alternative are ignored).
 
@@ -671,7 +671,7 @@ def mMR(A, W):
     return mMR, copy.deepcopy(s), single_MR
 
 def mMR_LP(A, W):
-    """ Computing minimax regret of A using linear programming. It can be used to select a binary query.
+    """ Computing minimax regret of A using the linear programming solver. It can be used to select a binary query.
     (based only on the utility vector of objects alternative,
     i.e. weights vectors of objects alternative are ignored).
 
